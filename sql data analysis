@@ -1,0 +1,78 @@
+SELECT * FROM HR
+
+select avg(age) as Average_age
+	from HR
+
+select country , count(*) AS EMPLOYEES_COUNT
+	from HR
+		GROUP BY Country
+			ORDER BY EMPLOYEES_COUNT DESC
+
+Select State , count(*) AS EMPLOYEES_COUNT
+	from HR
+		GROUP BY STATE
+			ORDER BY EMPLOYEES_COUNT DESC
+
+select Age , count(*) AS EMPLOYEES_COUNT
+	from HR
+		GROUP BY Age
+			ORDER BY EMPLOYEES_COUNT DESC
+
+ALTER TABLE HR
+	ADD AGE_BRACKET NVARCHAR(30)
+
+UPDATE HR
+	SET AGE_BRACKET = 
+		CASE	
+			WHEN Age<20 THEN 'Less then 20'
+			WHEN AGE>=20 AND AGE<30 THEN '20 to 30'
+			WHEN AGE>=30 AND AGE<40 THEN '30 to 40'
+			WHEN AGE>=40 AND AGE<50 THEN '40 to 50'
+			WHEN AGE>=50 AND AGE<60 THEN '50 to 60'
+			WHEN AGE>=60 AND AGE<70 THEN '60 to 70'
+			ELSE 'Greater then 70'
+				end;
+
+select age_bracket , count(*) as count
+	from HR
+		group by age_bracket
+			order by count desc
+
+UPDATE HR
+	SET Termination_Date = '2021-12-31 00:00:00.000'
+		WHERE Termination_Date = '2050-12-31 00:00:00.000';
+
+select
+	avg(DATEDIFF(YEAR,Start_date,Termination_Date))as average_years_served
+		from HR
+
+select Department ,round(avg(Salary),2) as average_salary
+	from HR
+		group by Department
+			order by average_salary
+
+select Department ,round(avg(Bonus_pct),2) as average_bonus
+	from HR
+		group by Department
+			order by average_bonus
+
+select Office , round(avg(salary),0) as avg_salary
+	from hr
+		group by Office
+			order by  avg_salary desc
+
+select Job_title , count(*) as count
+	from HR 
+		GROUP BY Job_title
+			order by count desc
+
+select office_type ,  count(*) as count 
+	from hr
+		group by Office_Type 
+
+select Office , round(avg(salary),0) as avg_salary , round(avg(bonus_pct),4) as bonus
+	from hr
+		group by Office
+			order by  avg_salary desc
+
+SELECT * FROM HR
